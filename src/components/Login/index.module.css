@@ -1,0 +1,131 @@
+.container{
+    margin: auto ;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 120px;
+}
+
+.h1{
+    font-size: 36px;
+    font-weight: 600;
+    margin: 10px 0 16px;
+    text-align: center;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
+}
+
+.input{
+    /* -webkit-appearance: none; */
+    background-color: #ffffff;
+    border: solid 1px #c3c4c7;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #2c3338;
+    height: 40px;
+    padding: 13px 15px;
+    margin: 8px auto 0;
+    max-width: 320px;
+    width: 95%;
+    font-size: 16px;
+}
+
+.inpSubmit{
+    background-color: #3361cc;
+    border: none;
+    color: #ffffff;
+    margin: 16px auto 8px;
+    padding: 0px 15px;
+    cursor: pointer;
+    border: solid 0px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 40px;
+    max-width: 320px;
+    width: 95%;
+    font-size: 16px;
+}
+
+.remembercont{
+    display: flex;
+    gap: 3px;
+}
+
+.remember{
+    display: inherit;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.forgot{
+    color: #3361cc;
+    font-size: 14px;
+    margin: 6px auto;
+    text-align: center;
+    text-decoration: none;
+}
+
+.or{
+    background: #ffffff;
+    color: #50575e;
+    font-size: 14px;
+    font-style: italic;
+    height: 20px;
+    margin: 10px auto;
+    text-align: center;
+    width: 50px;
+    z-index: 1;
+}
+
+.orline{
+    border-bottom: 1px solid #dbdee0;
+    margin: -20px auto;
+    max-width: 320px;
+    text-align: center;
+    width: 95%;
+    position: relative;
+    display: block;
+}
+
+.wrdprs{
+    background-color: #006088;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    height: 40px;
+    padding: 8px 15px;
+    margin: 50px auto 10px;
+    max-width: 320px;
+    text-align: center;
+    text-decoration: none;
+    width: 95%;
+}
+
+.signup{
+    color: #50575e;
+    font-size: 14px;
+    margin: 6px auto 10px;
+    max-width: 320px;
+    text-align: center;
+    width: 95%;
+}
+
+.signupa{
+    color: #3361cc;
+    font-size: 14px;
+    margin: 6px auto;
+    margin-left: 6px;
+    text-align: center;
+    text-decoration: none;
+}
