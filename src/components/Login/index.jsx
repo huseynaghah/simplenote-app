@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useRef, useEffect}from 'react'
 import styles from "./index.module.css"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -24,6 +24,14 @@ export const Login = () => {
     }
 
     console.log(errors);
+
+    const inputReference = useRef(null);
+
+    useEffect(() => {
+        inputReference.current.focus();
+    }, []);
+
+
     return (<>
         <div className={styles.container}>
             <svg className="logo" width={96} height={96} style={{ minHeight: '96px', minWidth: '96px' }} viewBox="0 0 176 176">
@@ -34,7 +42,7 @@ export const Login = () => {
             </svg>
             <h1 className={styles.h1}>Log in</h1>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                <input defaultValue="" {...register("email")} className={styles.input} placeholder="Email" type="email" />
+                <input defaultValue="" {...register("email")} className={styles.input} placeholder="Email" type="email" ref={inputReference}/>
                 <input {...register("password", { required: true })} className={styles.input} placeholder="Password" type="password" onInput={checkVal} pattern='.{4,}' />
                 {errors.password && <span></span>}
                 <input type="submit" className={styles.inpSubmit} value="Log in" />
@@ -42,13 +50,13 @@ export const Login = () => {
                     <input type="checkbox" name="remember" id="check" {...register("remember")} />
                     <label htmlFor="remember" className={styles.remember}>Remember Me</label>
                 </div>
-                <a href='#' className={styles.forgot}>Forgot your password?</a>
+                <a href='/forgot' className={styles.forgot}>Forgot your password?</a>
                 <span className={styles.or}>Or</span>
                 <span className={styles.orline}></span>
                 <a className={styles.wrdprs} href="#">
                     Log in with WordPress.com
                 </a>
-                <p className={styles.signup}>Don't have an account?<a href="#" className={styles.signupa}>Sign up</a></p>
+                <p className={styles.signup}>Don't have an account?<a href="/signup" className={styles.signupa}>Sign up</a></p>
             </form>
         </div>
     </>
