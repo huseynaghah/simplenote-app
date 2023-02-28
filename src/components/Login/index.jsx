@@ -27,13 +27,15 @@ export const Login = () => {
 
     const inputReference = useRef(null);
 
-    useEffect(() => {
-        inputReference.current.focus();
-    }, []);
+    // useEffect(() => {
+    //     inputReference.current.focus();
+    // }, []);
 
 
     return (<>
         <div className={styles.container}>
+            <div className='container'>
+            </div>
             <svg className="logo" width={96} height={96} style={{ minHeight: '96px', minWidth: '96px' }} viewBox="0 0 176 176">
                 <g fillRule="evenodd" clipRule="evenodd">
                     <circle cx={88} cy={88} r={88} fill="transparent" />
@@ -42,7 +44,7 @@ export const Login = () => {
             </svg>
             <h1 className={styles.h1}>Log in</h1>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                <input defaultValue="" {...register("email")} className={styles.input} placeholder="Email" type="email" ref={inputReference}/>
+                <input {...register("email", {required: true})} className={styles.input} placeholder="Email" type="email"/>
                 <input {...register("password", { required: true })} className={styles.input} placeholder="Password" type="password" onInput={checkVal} pattern='.{4,}' />
                 {errors.password && <span></span>}
                 <input type="submit" className={styles.inpSubmit} value="Log in" />

@@ -1,0 +1,39 @@
+{
+  "activeNotes": [
+    {
+      "id": "8c49a0f4-010b-44c7-bb85-625f27db1e98",
+      "content": "dafodjvoadjiod",
+      "creationDate": "2023-02-23T05:50:17.267Z",
+      "lastModified": "2023-02-23T05:50:19.497Z",
+      "markdown": true
+    },
+    {
+      "id": "3cec5f76-2fbe-4f94-847c-8d8f7bbc4430",
+      "content": "- Plus\r\n- Plus\r\n- Plus\r\n- \r\n\r\n-Plus\r\n",
+      "creationDate": "2023-02-21T07:52:26.030Z",
+      "lastModified": "2023-02-24T06:17:00.327Z",
+      "markdown": true,
+      "publicURL": "http://simp.ly/p/HnhpjX"
+    },
+    {
+      "id": "3f4275e9-715b-464d-ad8e-1406b66bc0d4",
+      "content": "Bullet list:\r\n  * apples\r\n  * oranges\r\n  * pears\r\n<ul>\r\n<li>apples</li>\r\n<li>oranges</li>\r\n<li>pears</li>\r\n</ul>",
+      "creationDate": "2023-02-20T18:46:25.175Z",
+      "lastModified": "2023-02-24T06:16:33.256Z",
+      "markdown": true
+    },
+    {
+      "id": "42adbc1e-53f5-499c-9fbf-208c365ce7cd",
+      "content": "",
+      "creationDate": "2023-02-20T19:06:12.104Z",
+      "lastModified": "2023-02-20T19:06:12.104Z"
+    },
+    {
+      "id": "agtzaW1wbGUtbm90ZXIRCxIETm90ZRiAgIiiu5r-CQw",
+      "content": "Welcome to Simplenote\r\n\r\nSimplenote is an easy way to take notes, create to-do lists, capture ideas, and more. Open it, jot down some thoughts, and you're done. Since Simplenote will sync across your devices for free, your notes are with you at all times.\r\n\r\nMarkdown\r\n\r\nUse markdown to add styles to your notes. Select “Markdown” from the note options to enable markdown on your current note. Find out more about using markdown at https://simplenote.com/help/#markdown.\r\n\r\nPinned Notes\r\n\r\nHave a few important notes that you keep coming back to? Pin those notes to the top of your list for easier access.\r\n\r\nTags\r\n\r\nKeep your notes organized by adding tags. Tags work a bit like folders, except there’s no limit to the number of tags you can add per note.\r\n\r\nInternal Links\r\n\r\nReference one note in another. Select “Copy Internal Link” from the note options or type “[“ followed by the title of the note you want to link. Find out more about internal links at https://simplenote.com/help/#internal-links.\r\n\r\nSyncing\r\n\r\nThere is no “Save” button as all your changes are automatically synced and accessible from any platform. Find out more about syncing at https://simplenote.com/help/#syncing.\r\n\r\nSearch\r\n\r\nQuickly find notes using search. To search by tag, type “tag:” in the search bar followed by the name of your tag.\r\n\r\nPublishing\r\n\r\nShare your notes by publishing them online. Select “Publish” from the note options to generate a public link. Find out more about publishing at https://simplenote.com/help/#publish.",
+      "creationDate": "2023-02-20T12:59:39.278Z",
+      "lastModified": "2023-02-20T18:57:02.449Z"
+    }
+  ],
+  "trashedNotes": []
+}
