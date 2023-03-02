@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
-// import List from '@mui/material/List';
+import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -12,16 +12,14 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import styles from "./Left.module.css"
 import data from "/Users/huseynagahaqverdiyev/Documents/simplenote-app/notes.json"
-import { List} from 'react-virtualized'
+import { List as ListNote} from 'react-virtualized'
 
-const list = [
-  'Brian Vaughn',
-  "salam",
-  "sagol"
+
+function handleClick(e){
+  e.currentTarget.style.backgroundColor = '#ced9f2';
   
-  // And so on...
-];
 
+}
 
 function rowRenderer({
   key, // Unique key within array of rows
@@ -38,7 +36,7 @@ function rowRenderer({
           <svg className="icon-pinned-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"></rect><path d="M4.41 10.17l-4-4 5.65-0.52L8.65 3.1 7.24 1.69l1.42-1.42 7.07 7.07 -1.42 1.42 -1.42-1.43 -2.56 2.58 -0.52 5.66 -4-4L3 14.41 1.59 13 4.41 10.17zM8.21 11.17L8.4 9l3.07-3.1 -1.4-1.41L7 7.6 4.87 7.79 8.21 11.17z"></path></svg>
           </button>
         </div>
-        <button className={styles.notelistitemstext}>
+        <button className={styles.notelistitemstext} onClick={handleClick}>
           <div className={styles.title}>
             <span>{data.activeNotes[index].content.split("\r\n")[0]}</span>
           </div>
@@ -73,54 +71,54 @@ export default function SwipeableTemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
-  // const list = (anchor) => (
-  //   <Box
-  //     sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-  //     role="presentation"
-  //     onClick={toggleDrawer(anchor, false)}
-  //     onKeyDown={toggleDrawer(anchor, false)}
-  //   >
-  //     <List>
-  //       <ListItem disablePadding>
-  //         <ListItemButton>
-  //           <ListItemIcon>
-  //             <InboxIcon />
-  //           </ListItemIcon>
-  //           <ListItemText primary="All Notes" />
-  //         </ListItemButton>
-  //       </ListItem>
-  //       <ListItem disablePadding>
-  //         <ListItemButton>
-  //           <ListItemIcon>
-  //             <InboxIcon />
-  //           </ListItemIcon>
-  //           <ListItemText primary="Trash" />
-  //         </ListItemButton>
-  //       </ListItem>
-  //       <ListItem disablePadding>
-  //         <ListItemButton>
-  //           <ListItemIcon>
-  //             <InboxIcon />
-  //           </ListItemIcon>
-  //           <ListItemText primary="Settings" />
-  //         </ListItemButton>
-  //       </ListItem>
-  //     </List>
-  //     <Divider />
-  //     <List>
-  //       {['All mail', 'Trash', 'Spam'].map((text, index) => (
-  //         <ListItem key={text} disablePadding>
-  //           <ListItemButton>
-  //             <ListItemIcon>
-  //               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-  //             </ListItemIcon>
-  //             <ListItemText primary={text} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Box>
-  // );
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="All Notes" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Trash" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
   return (<>
     <div className={styles.navbar}>
@@ -134,7 +132,7 @@ export default function SwipeableTemporaryDrawer() {
           onClose={toggleDrawer("left", false)}
           onOpen={toggleDrawer("left", true)}
         >
-          {/* {list("left")} */}
+          {list("left")}
         </SwipeableDrawer>
       </React.Fragment>
       <div className={styles.title}>All notes</div>
@@ -150,7 +148,7 @@ export default function SwipeableTemporaryDrawer() {
       {searchValue && <button className={styles.leftbut} onClick={() => setSearchValue("")}><svg classNae="icon-cross-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"></rect><path d="M13.66 3.76l-1.42-1.42L8 6.59 3.76 2.34 2.34 3.76 6.59 8l-4.25 4.24 1.42 1.42L8 9.41l4.24 4.25 1.42-1.42L9.41 8 13.66 3.76z"></path></svg></button>}
     </div>
     <div className={styles.notelist}>
-      <List
+      <ListNote
         width={360}
         height={600}
         rowCount={data.activeNotes.length}

@@ -91,6 +91,9 @@
     -webkit-appearance: none;
     appearance: none;
     vertical-align: baseline;
+    background-color: white;
+    border : 0.5px solid gray;
+    border-left: 0;
 }
 
 .pinner{
