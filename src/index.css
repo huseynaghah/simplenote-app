@@ -77,3 +77,19 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+/* 
+.ql-toolbar {
+  display: none !important;
+} */
+
+.ql-editor{
+  width: 100% !important;
+}
+
+.quill {
+  width: 100% !important;
+}
+
+.ql-container{
+  border : 0px !important
+}

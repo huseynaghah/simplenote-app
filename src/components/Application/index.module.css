@@ -10,3 +10,8 @@
     height: 100vh;
     /* background-color: red; */
 }
+
+.rightbar{
+    width: 75%;
+    height: 100vh;
+}
