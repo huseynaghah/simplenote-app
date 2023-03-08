@@ -7,7 +7,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 export const PrivateRoute = () => {
 
-    const [isLogged, setisLogged] = useState(true);
+    const [isLogged, setisLogged] = useState(false);
 
     if (isLogged) {
         return <Outlet />

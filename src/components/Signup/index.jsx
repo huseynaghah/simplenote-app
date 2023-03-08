@@ -1,24 +1,32 @@
-import React , {useEffect, useRef}from 'react'
+import React , {useEffect, useRef, useState}from 'react'
 import styles from "../Login/index.module.css"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import axios from 'axios';
 
 const schema = yup.object({
   email: yup.string().email().required(),
 }).required();
 
+
 export const Signup = () => {
 
-  const inputReference = useRef(null);
+  // const inputReference = useRef(null);
 
-  useEffect(() => {
-      inputReference.current.focus();
-  }, []);
+  // useEffect(() => {
+  //     inputReference.current.focus();
+  // }, []);
 
+  const [res, setres] = useState(false)
+  const [resdata, setresdata] = useState(null)
   const { register, handleSubmit, watch, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = data => console.log(data);
-
+  const onSubmit = (data) => {
+    axios.post("http://localhost:8090/api/users/signup", data)
+    .then((res)=>{console.log(res); setresdata(res); setres(true)})
+    .catch((err)=>{console.log(err);})
+  }
+ if (!res){
   return (
     <div className={styles.container}>
       <svg className="logo" width={96} height={96} style={{ minHeight: '96px', minWidth: '96px' }} viewBox="0 0 176 176">
@@ -29,11 +37,16 @@ export const Signup = () => {
       </svg>
       <h1 className={styles.h1}>Sign up</h1>
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <input defaultValue="" {...register("email")} className={styles.input} placeholder="Email" type="email" ref={inputReference}/>
+        <input defaultValue="" {...register("email")} className={styles.input} placeholder="Email" type="email" />
         <input type="submit" className={styles.inpSubmit} value="Sign up" />
         <p className={styles.signup}>By creating an account you agree to our<br/><a href="/" className={styles.signupa}>Terms of Service</a>.</p>
         <p className={styles.signup}>Already have an account?<a href="/login" className={styles.signupa}>Log in</a></p>
       </form>
     </div>
   )
+}else{
+  return (
+    <div> Mail sent to {resdata.data.email}</div>
+  )
+}
 }
