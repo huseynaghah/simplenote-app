@@ -5,7 +5,7 @@ import {PrivateRoute} from './PrivateRoute'
 import { Application } from '../components/Application'
 import { Signup } from '../components/Signup'
 import { Forgot } from '../components/Forgot'
-
+import { Verify } from '../components/Signup/Verify'
 export const PageRoutes = () => {
 
 
@@ -19,6 +19,7 @@ export const PageRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<Forgot />} />
             <Route path="/signup" element={<Signup/>} />
+            <Route path="/signup/verify" element={<Verify/>}/>
         </Routes>
 
     )
