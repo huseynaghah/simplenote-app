@@ -1,6 +1,6 @@
 import React , {useRef, useEffect, useState}from 'react'
 import styles from "../../Login/index.module.css"
-import { useForm } from "react-hook-form";
+import { useForm  } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { useSearchParams } from 'react-router-dom';
@@ -14,13 +14,32 @@ const schema = yup.object({
 
 export const Verify = () => {
 
+    const [info, setinfo] = useState('')
     const [mydata, setmydata] = useState("")
+    const [response, setresponse] =useState(null)
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-    const onSubmit = data => console.log(data);
+    const { register, setFocus, handleSubmit, watch, setValue, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
+    const onSubmit = data => {
+        axios.patch("http://localhost:8090/api/users/verify",data)
+        .then((res)=>{if(res.status=200){
+            setresponse(res);
+            setTimeout(function() {
+                window.location.replace('/login');
+              }, 5000)
+        }})
+        .catch((err)=>console.log(err))
+    }
 
     const [searchParams] =useSearchParams()
+    
+    useEffect(() => {
+        setValue("email", mydata.email);
+        setValue("confirmCode", mydata.confirmCode)
+      }, [info, setValue]);
 
+    useEffect(() => {
+        setFocus("password");
+      }, [setFocus]);
 
     useEffect(() => {
         if ([...searchParams][0]!==undefined){
@@ -28,7 +47,8 @@ export const Verify = () => {
         [...searchParams][0][0]=="code"){
         let code = [...searchParams][0][1]
         axios.post("http://localhost:8090/api/users/check", {confirmCode : code})
-        .then((res)=>setmydata(res.data))
+        .then((res)=>{setmydata(res.data)
+        console.log(res);})
         .catch((err)=> setmydata(null))
       }}}, [])
     
@@ -41,6 +61,7 @@ export const Verify = () => {
         }
     }
 
+
     // console.log(mydata);
     // const inputReference = useRef(null);
 
@@ -49,8 +70,11 @@ export const Verify = () => {
     // }, []);
 
     if ([...searchParams].length===0 || [...searchParams][0][0]!=="code" || mydata==null){
-        return(<div>Link is invalid</div>)
-    }else{
+        return(<div>Link is invalid</div>)}
+        else if(response){
+            return (<div>User successfully created!</div>)
+        }
+    else{
     return (<>
         <div className={styles.container}>
             <div className='container'>
@@ -63,9 +87,8 @@ export const Verify = () => {
             </svg>
             <h1 className={styles.h1}>Choose Password to your account</h1>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-                <input {...register("email", {required: true})} className={styles.input} placeholder="Email" type="email" value={mydata.email} />
-                <input {...register("confirmCode", {required: true})}  className={styles.input} type="text" value={mydata.confirmCode} />
-                <input {...register("password", { required: true })} className={styles.input} placeholder="Password" type="password" onInput={checkVal} pattern='.{4,}' />
+                <input className={styles.input} placeholder="Email" type="email" value={mydata.email} />
+                <input {...register("password")} className={styles.input} placeholder="Password" type="password" onInput={checkVal} pattern='.{4,}' onChange={()=>setinfo(1)} />
                 {errors.password && <span></span>}
                 <input type="submit" className={styles.inpSubmit} value="Create Account" />
             </form>

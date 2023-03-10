@@ -1,8 +1,11 @@
-import React , {useRef, useEffect}from 'react'
+import React , {useRef, useEffect, useContext}from 'react'
 import styles from "./index.module.css"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
 import * as yup from "yup";
+import axios from 'axios';
+import { authContext } from '../../store/AuthContext'
 
 const schema = yup.object({
     email: yup.string().email().required(),
@@ -11,8 +14,23 @@ const schema = yup.object({
 
 export const Login = () => {
 
+    const { loginStatus, setloginStatus } = useContext(authContext);
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
-    const onSubmit = data => console.log(data);
+
+    let navigate = useNavigate()
+    const onSubmit =  async (data) => {
+        await axios.post("http://localhost:8090/api/users/signin", data)
+        .then(async (res)=>{
+            await localStorage.setItem('token', res.data.token);
+            setloginStatus(true)
+            console.log(loginStatus);
+            navigate("/");
+
+        })
+        .catch((err)=>{alert("Username or password is incorrect")})
+        console.log(data)
+    };
 
 
     const checkVal = (e) => {
