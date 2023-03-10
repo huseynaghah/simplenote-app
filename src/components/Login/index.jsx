@@ -24,12 +24,13 @@ export const Login = () => {
         .then(async (res)=>{
             await localStorage.setItem('token', res.data.token);
             setloginStatus(true)
-            console.log(loginStatus);
+            localStorage.setItem("user",JSON.stringify(res.data.userInf))
+            console.log(res);
             navigate("/");
 
         })
         .catch((err)=>{alert("Username or password is incorrect")})
-        console.log(data)
+        
     };
 
 

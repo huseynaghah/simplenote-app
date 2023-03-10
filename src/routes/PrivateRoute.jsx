@@ -12,6 +12,7 @@ export const PrivateRoute = () => {
     // const [status, setstatus] = useState(false)
     
     const {loginStatus, setloginStatus} = useContext(authContext)
+    const userInfo = localStorage.getItem("user")
 
     // useEffect(() => {
     //     let token = localStorage.getItem("token")
@@ -23,7 +24,7 @@ export const PrivateRoute = () => {
     
 
 
-    if (loginStatus) {
+    if (loginStatus || userInfo) {
         return <Outlet />
     } else {
         return <Navigate to="/login" />;
