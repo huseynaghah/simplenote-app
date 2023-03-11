@@ -13,6 +13,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import styles from "./Left.module.css"
 import data from "/Users/huseynagahaqverdiyev/Documents/simplenote-app/notes.json"
 import { List as ListNote} from 'react-virtualized'
+import { useContext } from 'react';
+import { authContext } from '../../../store/AuthContext';
 
 
 function handleClick(e){
@@ -21,36 +23,42 @@ function handleClick(e){
 
 }
 
-function rowRenderer({
-  key, // Unique key within array of rows
-  index, // Index of row within collection
-  isScrolling, // The List is currently being scrolled
-  isVisible, // This row is visible within the List (eg it is not an overscanned row)
-  style, // Style object to be applied to row (to position it)
-}) {
-  return (
-    <div key={key} style={style} className={styles.notelistitem} >
-      <div className={styles.notelistitemcontent}>
-        <div className={styles.notelistitemstatus}>
-          <button className={styles.pinner}>
-          <svg className="icon-pinned-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"></rect><path d="M4.41 10.17l-4-4 5.65-0.52L8.65 3.1 7.24 1.69l1.42-1.42 7.07 7.07 -1.42 1.42 -1.42-1.43 -2.56 2.58 -0.52 5.66 -4-4L3 14.41 1.59 13 4.41 10.17zM8.21 11.17L8.4 9l3.07-3.1 -1.4-1.41L7 7.6 4.87 7.79 8.21 11.17z"></path></svg>
-          </button>
-        </div>
-        <button className={styles.notelistitemstext} onClick={handleClick}>
-          <div className={styles.title}>
-            <span>{data.activeNotes[index].content.split("\r\n")[0]}</span>
-          </div>
-        </button>
-      </div>
-    </div>
-  );
-}
+
 
 
 
 export default function SwipeableTemporaryDrawer() {
 
-  console.log(data);
+  const {currentuser, notes, setNotes} = useContext(authContext)
+
+  function rowRenderer({
+    key, // Unique key within array of rows
+    index, // Index of row within collection
+    isScrolling, // The List is currently being scrolled
+    isVisible, // This row is visible within the List (eg it is not an overscanned row)
+    style, // Style object to be applied to row (to position it)
+  }){
+  
+  
+    return (
+      <div key={key} style={style} className={styles.notelistitem} >
+        <div className={styles.notelistitemcontent}>
+          <div className={styles.notelistitemstatus}>
+            <button className={styles.pinner}>
+            <svg className="icon-pinned-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect x="0" fill="none" width="16" height="16"></rect><path d="M4.41 10.17l-4-4 5.65-0.52L8.65 3.1 7.24 1.69l1.42-1.42 7.07 7.07 -1.42 1.42 -1.42-1.43 -2.56 2.58 -0.52 5.66 -4-4L3 14.41 1.59 13 4.41 10.17zM8.21 11.17L8.4 9l3.07-3.1 -1.4-1.41L7 7.6 4.87 7.79 8.21 11.17z"></path></svg>
+            </button>
+          </div>
+          <button className={styles.notelistitemstext} onClick={handleClick}>
+            <div className={styles.title}>
+              <span>{notes[index].content.split("\r\n")[0]}</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
+
   const [searchValue, setSearchValue] = React.useState("");
   const [state, setState] = React.useState({
     top: false,
@@ -151,7 +159,7 @@ export default function SwipeableTemporaryDrawer() {
       <ListNote
         width={360}
         height={600}
-        rowCount={data.activeNotes.length}
+        rowCount={notes.length}
         rowHeight={64}
         rowRenderer={rowRenderer}
       />

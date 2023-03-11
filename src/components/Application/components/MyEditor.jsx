@@ -12,7 +12,7 @@ const MyEditor = () => {
   return (
     
     <div>
-       <ReactQuill value={note} onChange={setnote} />
+       <ReactQuill value={note} onChange={setnote}  />
     </div>
   )
 }
