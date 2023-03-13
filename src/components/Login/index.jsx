@@ -14,7 +14,7 @@ const schema = yup.object({
 
 export const Login = () => {
 
-    const { loginStatus, setloginStatus } = useContext(authContext);
+    const { loginStatus, setloginStatus, setcurrentuser } = useContext(authContext);
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
 
@@ -24,7 +24,8 @@ export const Login = () => {
         .then(async (res)=>{
             await localStorage.setItem('token', res.data.token);
             setloginStatus(true)
-            localStorage.setItem("user",JSON.stringify(res.data.userInf))
+            await localStorage.setItem("user",JSON.stringify(res.data.userInf))
+            setcurrentuser(JSON.stringify(res.data.userInf))
             console.log(res);
             navigate("/");
 

@@ -1,0 +1,491 @@
+/* ============================= Default Styles ==================== */
+
+/* Colors */
+:root {
+    --foreground-color: #646970;
+    --primary-color: #2c3338;
+    --secondary-color: #dcdcde;
+    --tertiary-color: #a7aaad;
+    --accent-color: #3361cc;
+    --secondary-accent-color: #c3c4c7;
+    --tertiary-accent-color: #8c8f94;
+    --highlight-color: #ced9f2;
+    --secondary-highlight-color: #f6f7f7;
+    --tertiary-highlight-color: #d63638;
+    --overlay-color: rgba(0, 0, 0, 0.2);
+    --search-selection-color: #f0c930;
+    --search-highlight-color: #ced9f2;
+    --wordpress-color: #006088;
+    --active-controls-color: #1ed15a;
+    --inactive-controls-color: #c3c4c7;
+    --warning-highlight-color: #faa754;
+    --primary-button-bg-color: #3361cc;
+    --secondary-button-bg-color: #646970;
+    --primary-button-fg-color: #fff;
+    --primary-branding-color: #3361cc;
+    --placeholder-color: #646970;
+    --readonly-input-color: rgba(0, 0, 0, 0.05);
+    --readonly-input-highlight-color: #c3c4c7;
+    --primary-slider-color: #dcdcde;
+    --secondary-slider-color: #fff;
+    --primary-tag-chip-color: #dcdcde;
+    --secondary-tag-chip-color: #facfd2;
+    --settings-fg-color: #2c3338;
+    --alternative-highlight-color: #f6f7f7;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, "BlinkMacSystemFont", "Segoe UI", "Roboto",
+      "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    font-size: 14px;
+    color: var(--primary-color);
+    overflow: hidden;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    z-index: 1;
+  }
+  
+  /* ==================== Components Mutual Classes ====================== */
+  .column-container {
+    height: 100vh;
+  }
+  
+  header {
+    border-bottom: thin solid var(--secondary-accent-color);
+  }
+  
+  /* ==================== Note List Component Styles ===================== */
+  .all-notes-container {
+    border-right: thin solid var(--secondary-accent-color);
+    grid-column: 1 / 2;
+  }
+  
+  .all-notes__header {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 1rem;
+  }
+  
+  .all-notes__header p {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .all-notes__header img {
+    width: 24px;
+    cursor: pointer;
+  }
+  
+  .input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 1rem;
+    border-bottom: thin solid var(--secondary-accent-color);
+  }
+  
+  .input img {
+    width: 16px;
+  }
+  
+  input[type="text"] {
+    all: unset;
+    margin-right: auto;
+    padding: 10px;
+    flex-basis: 100%;
+    font-size: 1rem;
+    color: var(--primary-color);
+  }
+  
+  input::placeholder {
+    font-family: inherit;
+    font-size: 1.1rem;
+    color: var(--placeholder-color);
+  }
+  
+  .clear-icon {
+    cursor: pointer;
+    user-select: none;
+    visibility: hidden;
+  }
+  
+  .create-icon-image {
+    width: 48px;
+  }
+  
+  .create-note {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .create-note-button {
+    all: unset;
+    cursor: pointer;
+    color: var(--accent-color);
+    margin-top: 10px;
+  }
+  
+  .note-list {
+    overflow: auto;
+    height: 100%;
+  }
+  
+  .note-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .note-element {
+    padding: 1rem;
+    border-bottom: thin solid var(--secondary-accent-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .note-data {
+    white-space: nowrap;
+    text-overflow: ellipsis ellipsis;
+    overflow: hidden;
+    max-width: 300px;
+  }
+  
+  .note-data p {
+    margin: 0;
+  }
+  
+  .note-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 4px !important;
+  }
+  
+  .pin {
+    width: 16px;
+    user-select: none;
+    visibility: hidden;
+  }
+  
+  .pin-active {
+    user-select: all;
+    visibility: visible;
+  }
+  
+  .path {
+    fill: var(--foreground-color);
+  }
+  
+  .active-focused {
+    fill: var(--primary-color);
+  }
+  
+  .active-path {
+    fill: var(--accent-color);
+  }
+  
+  .note-element:hover {
+    background: var(--secondary-highlight-color);
+  }
+  
+  .note-element:hover .pin {
+    user-select: all;
+    visibility: visible;
+  }
+  
+  .active-note {
+    background: var(--highlight-color);
+  }
+  
+  .note-element.active-note:hover {
+    background: var(--highlight-color);
+  }
+  
+  /* ====================== Note Component styles ==================== */
+  
+  .main-logo {
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .main-logo path {
+    fill: var(--secondary-color);
+  }
+  
+  .note-container {
+    grid-column: 2 / -1;
+  }
+  
+  .note-header {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    padding: 14.8px;
+  }
+  
+  .vertical-line {
+    width: 1px;
+    height: 53px;
+    background: var(--primary-color);
+    position: absolute;
+    top: 0;
+    left: 2.9rem;
+    display: none;
+  }
+  
+  .display-vertical-line {
+    display: block;
+  }
+  
+  .note-header img {
+    width: 24px;
+    cursor: pointer;
+    visibility: hidden;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+  }
+  
+  .note-header img:first-child {
+    margin-right: 1rem;
+    display: none;
+  }
+  
+  .note-header a {
+    display: none;
+    width: 24px;
+  }
+  
+  .display-link {
+    display: block !important;
+  }
+  
+  .markdown {
+    margin-right: 1.3rem;
+  }
+  
+  .toggle {
+    margin-right: auto;
+  }
+  
+  .info {
+    margin-inline: 1.3rem;
+  }
+  
+  .show-element {
+    visibility: visible !important;
+    user-select: auto !important;
+  }
+  
+  .note-body {
+    height: calc(100% - 53px);
+    width: 100%;
+    padding: 2rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--primary-color);
+    outline: none;
+    border: none;
+    resize: none;
+  }
+  
+  .note-body::selection {
+    background: var(--highlight-color);
+    border-radius: 10px;
+  }
+  
+  /* ======================= Custom Scrollbar All Notes ======================= */
+  .note-list::-webkit-scrollbar,
+  .markdown-container::-webkit-scrollbar {
+    width: 15.5px;
+  }
+  
+  .note-list::-webkit-scrollbar-track,
+  .markdown-container::-webkit-scrollbar-track {
+    margin: 4px;
+  }
+  
+  .note-list::-webkit-scrollbar-thumb,
+  .markdown-container::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 7px;
+    border-left: 4px solid white;
+    border-right: 4px solid white;
+  }
+  
+  .note-list::-webkit-scrollbar-thumb:hover,
+  .markdown-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--tertiary-accent-color);
+  }
+  
+  /* ================ Custom Scrollbar Note Element ===================== */
+  .note-body::-webkit-scrollbar {
+    width: 0px;
+    transition: width 2s;
+  }
+  
+  .note-body:hover.note-body::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .note-body::-webkit-scrollbar-track {
+    margin: 2.5rem;
+  }
+  
+  .note-body::-webkit-scrollbar-thumb {
+    background: var(--secondary-accent-color);
+    border-radius: 10px;
+    border: 3px solid var(--tertiary-accent-color);
+  }
+  
+  .note-body::-webkit-scrollbar-thumb:hover {
+    background: var(--tertiary-accent-color);
+  }
+  
+  /* ====================== More Tools Component Styles ================= */
+  .more-tools-container {
+    position: absolute;
+    right: 1rem;
+    bottom: -8.2rem;
+    width: 200px;
+    border-radius: 6px;
+    padding-block: 13px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+  }
+  
+  .note-action {
+    display: flex;
+    padding: 5px 1rem;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .note-action:hover {
+    background-color: var(--secondary-highlight-color);
+  }
+  
+  .note-action button {
+    all: unset;
+    color: var(--tertiary-highlight-color);
+    width: 100%;
+  }
+  
+  /* ========================== MARKDOWN COMPONENT ================== */
+  .markdown-container {
+    overflow: auto;
+    height: calc(100% - 53px);
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--primary-color);
+  }
+  
+  /* ==================== TOGGLE ALL NOTES ======================== */
+  .all-notes-container.disable-all-notes {
+    position: absolute;
+    transition: all 1s ease-in;
+    transform: translate(-10000%);
+  }
+  
+  .note-container.toggle-note-container {
+    grid-column: 1 / -1;
+  }
+  
+  .note-container.toggle-note-container > .note-header > img {
+    display: block;
+  }
+  
+  /* Break points */
+  @media screen and (max-width: 750px) {
+    .all-notes-container {
+      grid-column: 1 / -1;
+    }
+  
+    .note-container {
+      width: 100vw;
+    }
+  
+    .toggle {
+      display: none;
+    }
+  }
+  
+  /* ========================== Note Info Styles =============================== */
+  
+  .note-info__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: grid;
+    place-items: center;
+  }
+  
+  .note-info {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 350px;
+    z-index: 3;
+  }
+  
+  .note-info__header,
+  .note-info__body > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .note-info__header {
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  
+  .border-bottom {
+    width: 350px;
+    height: 1px;
+    border-bottom: thin solid var(--secondary-accent-color);
+    position: absolute;
+    top: 35px;
+    left: -1.1rem;
+  }
+  
+  .note-info__header img {
+    width: 17px;
+    cursor: pointer;
+  }
+  
+  .note-info__body > div {
+    margin-block: 10px;
+  }
+  
+  .note-info__header h3 {
+    margin: 0;
+    font-weight: 500;
+  }
+  

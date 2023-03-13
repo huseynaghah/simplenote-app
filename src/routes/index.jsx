@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Routes, Route, Router } from 'react-router'
 import { Login } from "../components/Login"
 import {PrivateRoute} from './PrivateRoute'
-import { Application } from '../components/Application'
+import  Container  from '../components/Application/Container'
 import { Signup } from '../components/Signup'
 import { Forgot } from '../components/Forgot'
 import { Verify } from '../components/Signup/Verify'
@@ -14,7 +14,8 @@ export const PageRoutes = () => {
 
             
             <Route exact path='/' element={<PrivateRoute />}>
-                <Route exact path='/' element={<Application />} />
+                <Route exact path='/' element={<Container />} />
+                <Route exact path='/note' element={<Container />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<Forgot />} />
