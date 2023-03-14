@@ -6,7 +6,7 @@ function DisplayAllNotes({ noteList, getCurrentNote, currentNote, pinNote }) {
     <div className="note-list">
       {noteList.map((note) => {
         return (
-          <Link key={note._id} to="/note" className="note-link">
+          <Link key={note._id} to="/note/" className="note-link">
             <div
               className={
                 currentNote._id === note._id
@@ -31,7 +31,7 @@ function DisplayAllNotes({ noteList, getCurrentNote, currentNote, pinNote }) {
                     ? "pin pin-active icon-pinned-small"
                     : "pin icon-pinned-small"
                 }
-                onClick={(e) => pinNote(e, note._id)}
+                onClick={(e) => pinNote(e, note._id, note.isPinned)}
               >
                 <rect x="0" fill="none" width="16" height="16"></rect>
                 <path

@@ -7,7 +7,7 @@ function Markdown({ currentNote }) {
   return (
     <ReactMarkdown
       className="markdown-container"
-      children={currentNote.data}
+      children={currentNote.content}
       remarkPlugins={[remarkGfm]}
       components={{
         code({ node, inline, className, children, ...props }) {

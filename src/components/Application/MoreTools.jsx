@@ -22,7 +22,7 @@ const MoreTools = forwardRef(
             type="checkbox"
             checked={checked}
             onChange={(e) => {
-              pinNote(e, currentNote._id);
+              pinNote(e, currentNote._id, currentNote.isPinned);
             }}
           />
         </label>

@@ -3,9 +3,12 @@ import searchIcon from "../../images/search-icon.svg";
 import clearIcon from "../../images/search-icon.svg";
 import createIcon from "../../images/search-icon.svg";
 import hamburgerIcon from "../../images/hamburger.svg";
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
 
 import { useEffect, useState, useRef, forwardRef } from "react";
 import DisplayAllNotes from "./DisplayAllNotes";
+import { margin, textAlign } from "@mui/system";
 
 const AllNotes = forwardRef(
   ({ noteList, addNewNote, getCurrentNote, currentNote, pinNote }, ref) => {
@@ -17,9 +20,25 @@ const AllNotes = forwardRef(
       setSearchNote(e.target.value);
     };
 
+    const logOut = () => {
+      localStorage.removeItem("user")
+      localStorage.removeItem("token")
+      localStorage.removeItem("acc")
+
+      window.location="/"
+    
+
+    }
+
     const handleClear = () => {
       setSearchNote("");
     };
+
+    const [isOpen, setIsOpen] = useState(false)
+    const toggleDrawer = () => {
+      setIsOpen((prevState) => !prevState)
+    }
+
 
     useEffect(() => {
       if (isInitialMount.current) {
@@ -42,10 +61,15 @@ const AllNotes = forwardRef(
       </div>
     );
 
+    let userAcc = localStorage.getItem("acc")
+
+
     return (
       <section className="column-container all-notes-container" ref={ref}>
         <header className="all-notes__header">
-          <img src={hamburgerIcon} alt="hamburgerIcon" />
+          <img src={hamburgerIcon}
+            alt="hamburgerIcon"
+            onClick={toggleDrawer} />
           <p>All Notes</p>
           <img
             src={newNoteIcon}
@@ -81,6 +105,15 @@ const AllNotes = forwardRef(
         ) : (
           createFirstElement
         )}
+        <Drawer
+          open={isOpen}
+          onClose={toggleDrawer}
+          direction='left'
+          className='bla bla bla'
+        >
+          <div style={{border: '1px solid black', margin:'4px', height:'40px', textAlign:'center', paddingTop:'3%'}}>{JSON.parse(userAcc)}</div>
+          <div style={{border: '0', margin:'4px', height:'40px', textAlign:'center', paddingTop:'3%', backgroundColor:'#ced9f2'}} onClick={logOut}>Log out</div>
+        </Drawer>
       </section>
     );
   }

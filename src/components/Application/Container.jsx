@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState, useRef } from "react";
@@ -10,7 +9,11 @@ import NoteInfo from "./NoteInfo";
 import axios from "axios";
 import getItems from "./getNotes";
 
+
 function Container() {
+
+
+  let token = localStorage.getItem("token")
 
   const [noteList, setNoteList] = useState([]);
   const [currentNote, setCurrentNote] = useState(() => {
@@ -21,7 +24,13 @@ function Container() {
 
   useEffect(() => {
     getItems()
-    .then( (data)=>{localStorage.setItem("noteList", JSON.stringify([...data][0])); setNoteList([...data][0]); })
+    .then( (data)=>{
+    // setNoteList([...data][0]);
+    const pinnedNotes = [...data][0].filter((note) => note.isPinned);
+    const withoutPinned = [...data][0].filter((note) => !note.isPinned);
+    [...data][0].length > 0 && setCurrentNote([...data][0][0])
+    setNoteList([...pinnedNotes, ...withoutPinned]);
+   })
     .catch((err)=>console.log(err))
 
 
@@ -45,8 +54,11 @@ function Container() {
   const verticalLineRef = useRef();
 
   const addNewNote = () => {
+
+    let userDataFromLocalHost = JSON.parse(localStorage.getItem("user"))
+    console.log(userDataFromLocalHost);
     
-    axios.post("http://localhost:8090/api/notes/", {userId: "640b1861953d4a7402486432"})
+    axios.post("http://localhost:8090/api/notes/", {userId: userDataFromLocalHost}, {headers: {Authorization : "Bearer " + token}})
     .then((res)=>{
       console.log(res.data);
       const date = new Date();
@@ -85,10 +97,13 @@ function Container() {
 
   const handleTodo = () => {};
 
-  const pinNote = (e, ID) => {
+  const pinNote = (e, ID, isP) => {
     e.stopPropagation();
     e.preventDefault();
 
+    axios.patch("http://localhost:8090/api/notes/pin", {"_id": ID, "isPinned" : !isP}, {headers: {Authorization : "Bearer " + token}} )
+    .then((res)=>console.log(res))
+    .catch((err)=>console.log(err))
 
     const newList = noteList.map((note) => {
       return note._id === ID
@@ -129,12 +144,26 @@ function Container() {
     })
     );
 
-    axios.patch("http://localhost:8090/api/notes/edit", {"_id": currentNote._id, content: e.target.value})
+    
+
+    axios.patch("http://localhost:8090/api/notes/edit", {"_id": currentNote._id, content: e.target.value, lastModified: date}, {headers: {Authorization : "Bearer " + token}})
     .then((res)=>console.log(res.data))
     .catch((err)=>console.log(err))
+
+
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
+
+    console.log("repsel", id);
+
+    axios.post("http://localhost:8090/api/notes/delete",  {"_id" : id}, {headers: {Authorization : "Bearer " + token}})
+    .then((res)=>{
+      console.log(res.data)
+      
+    })
+    .catch((err)=>console.log(err))
+    
     const newNoteList = noteList.filter((note) => note._id !== id);
     const indexCurrent = noteList.indexOf(currentNote);
 
@@ -147,6 +176,8 @@ function Container() {
     } else {
       setCurrentNote(noteList[indexCurrent + 1]);
     }
+
+
   };
 
   const handleToggle = () => {
@@ -217,7 +248,7 @@ function Container() {
                 }
               />
               <Route
-                path="/note"
+                path="/"
                 element={
                   <Note
                     noteList={noteList}

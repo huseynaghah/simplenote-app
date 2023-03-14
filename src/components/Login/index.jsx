@@ -23,9 +23,11 @@ export const Login = () => {
         await axios.post("http://localhost:8090/api/users/signin", data)
         .then(async (res)=>{
             await localStorage.setItem('token', res.data.token);
-            setloginStatus(true)
-            await localStorage.setItem("user",JSON.stringify(res.data.userInf))
-            setcurrentuser(JSON.stringify(res.data.userInf))
+            // setloginStatus(true)
+            await localStorage.setItem("user",JSON.stringify(res.data.userId))
+            await localStorage.setItem("acc",JSON.stringify(res.data.email))
+
+            // setcurrentuser(JSON.stringify(res.data.userInf))
             console.log(res);
             navigate("/");
 
