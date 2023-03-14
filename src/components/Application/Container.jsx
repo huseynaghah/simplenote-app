@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import { useEffect, useState, useRef } from "react";
 import Note from "./Note";
 import AllNotes from "./AllNotes";
