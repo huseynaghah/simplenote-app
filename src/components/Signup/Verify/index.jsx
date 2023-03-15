@@ -46,7 +46,7 @@ export const Verify = () => {
       if (
         [...searchParams][0][0]=="code"){
         let code = [...searchParams][0][1]
-        axios.post("http://localhost:8090/api/users/check", {confirmCode : code})
+        axios.post("https://simple-note-api.herokuapp.com/api/users/check", {confirmCode : code})
         .then((res)=>{setmydata(res.data)
         console.log(res);})
         .catch((err)=> setmydata(null))
