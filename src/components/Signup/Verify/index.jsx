@@ -20,7 +20,7 @@ export const Verify = () => {
 
     const { register, setFocus, handleSubmit, watch, setValue, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
     const onSubmit = data => {
-        axios.patch("https://simple-note-api.herokuapp.com//api/users/verify",data)
+        axios.patch("https://simple-note-api.herokuapp.com/api/users/verify",data)
         .then((res)=>{if(res.status=200){
             setresponse(res);
             setTimeout(function() {
