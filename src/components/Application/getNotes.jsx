@@ -12,7 +12,7 @@ async function getItems() {
   const responseData = [];
   let user = JSON.parse(localStorage.getItem("user"))
   let token = localStorage.getItem("token")
-  await axios.get(`http://localhost:8090/api/notes/`+user, { headers: { Authorization: "Bearer " + token } })
+  await axios.get(`https://simple-note-api.herokuapp.com/api/notes/`+user, { headers: { Authorization: "Bearer " + token } })
     .then((res) => {
      
         // console.log(res.data);

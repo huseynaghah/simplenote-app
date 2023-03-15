@@ -57,7 +57,7 @@ function Container() {
     let userDataFromLocalHost = JSON.parse(localStorage.getItem("user"))
     console.log(userDataFromLocalHost);
     
-    axios.post("http://localhost:8090/api/notes/", {userId: userDataFromLocalHost}, {headers: {Authorization : "Bearer " + token}})
+    axios.post("https://simple-note-api.herokuapp.com/api/notes/", {userId: userDataFromLocalHost}, {headers: {Authorization : "Bearer " + token}})
     .then((res)=>{
       console.log(res.data);
       const date = new Date();
@@ -100,7 +100,7 @@ function Container() {
     e.stopPropagation();
     e.preventDefault();
 
-    axios.patch("http://localhost:8090/api/notes/pin", {"_id": ID, "isPinned" : !isP}, {headers: {Authorization : "Bearer " + token}} )
+    axios.patch("https://simple-note-api.herokuapp.com/api/notes/pin", {"_id": ID, "isPinned" : !isP}, {headers: {Authorization : "Bearer " + token}} )
     .then((res)=>console.log(res))
     .catch((err)=>console.log(err))
 
@@ -145,7 +145,7 @@ function Container() {
 
     
 
-    axios.patch("http://localhost:8090/api/notes/edit", {"_id": currentNote._id, content: e.target.value, lastModified: date}, {headers: {Authorization : "Bearer " + token}})
+    axios.patch("https://simple-note-api.herokuapp.com/api/notes/edit", {"_id": currentNote._id, content: e.target.value, lastModified: date}, {headers: {Authorization : "Bearer " + token}})
     .then((res)=>console.log(res.data))
     .catch((err)=>console.log(err))
 
@@ -156,7 +156,7 @@ function Container() {
 
     console.log("repsel", id);
 
-    axios.post("http://localhost:8090/api/notes/delete",  {"_id" : id}, {headers: {Authorization : "Bearer " + token}})
+    axios.post("https://simple-note-api.herokuapp.com/api/notes/delete",  {"_id" : id}, {headers: {Authorization : "Bearer " + token}})
     .then((res)=>{
       console.log(res.data)
       

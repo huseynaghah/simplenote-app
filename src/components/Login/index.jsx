@@ -20,8 +20,10 @@ export const Login = () => {
 
     let navigate = useNavigate()
     const onSubmit =  async (data) => {
-        await axios.post("http://localhost:8090/api/users/signin", data)
+        console.log(data);
+        await axios.post("https://simple-note-api.herokuapp.com/api/users/signin", data)
         .then(async (res)=>{
+            console.log(res);
             await localStorage.setItem('token', res.data.token);
             // setloginStatus(true)
             await localStorage.setItem("user",JSON.stringify(res.data.userId))

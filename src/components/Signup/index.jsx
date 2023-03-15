@@ -22,7 +22,7 @@ export const Signup = () => {
   const [resdata, setresdata] = useState(null)
   const { register, handleSubmit, watch, formState: { errors } } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => {
-    axios.post("http://localhost:8090/api/users/signup", data)
+    axios.post("https://simple-note-api.herokuapp.com/api/users/signup", data)
     .then((res)=>{console.log(res); setresdata(res); setres(true)})
     .catch((err)=>{console.log(err);})
   }

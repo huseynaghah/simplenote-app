@@ -126,7 +126,7 @@ const Note = forwardRef(
             src={infoIcon}
             alt="Info Icon"
             className={noteList.length !== 0 ? "show-element info" : "info"}
-            onClick={handleInfo}
+            // onClick={handleInfo}
           />
           <img
             src={moreToolsIcon}
