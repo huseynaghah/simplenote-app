@@ -1,10 +1,13 @@
 import closeIcon from "../../images/info.svg";
 
 function NoteInfo({ handleInfo, currentNote }) {
-  const { created, modified, data } = currentNote;
+  const { creationDate, lastModified, content } = currentNote;
+
+  let dateLast = new Date (currentNote.lastModified)
+  console.log("eyooo" , dateLast.getHours());
 
   let wordCount = 0;
-  const dataArray = data.split("\n");
+  const dataArray = content.split("\n");
   dataArray.forEach((element) => {
     let newElement = element.trim();
     if (element !== "") {
@@ -38,35 +41,35 @@ function NoteInfo({ handleInfo, currentNote }) {
           <div>
             <span>Modified</span>
             <span>
-              {month[modified.month]} {modified.dayOfMonth}, {modified.year},{" "}
-              {created.hours === 0
+              {month[dateLast.getMonth()]} {dateLast.getDate()}, {dateLast.getFullYear()},{" "}
+              {dateLast.getHours() === 0
                 ? "00"
-                : created.hours < 10
-                ? `0${created.hours}`
-                : created.hours}
+                : dateLast.hours < 10
+                ? `0${dateLast.hours}`
+                : dateLast.hours}
               :
-              {created.minutes === 0
+              {dateLast.minutes === 0
                 ? "00"
-                : created.minutes < 10
-                ? `0${created.minutes}`
-                : created.minutes}
+                : dateLast.minutes < 10
+                ? `0${dateLast.minutes}`
+                : dateLast.minutes}
             </span>
           </div>
           <div>
             <span>Created</span>
             <span>
-              {month[created.month]} {created.dayOfMonth}, {created.year},{" "}
-              {created.hours === 0
+              {month[creationDate.month]} {creationDate.dayOfMonth}, {creationDate.year},{" "}
+              {creationDate.hours === 0
                 ? "00"
-                : created.hours < 10
-                ? `0${created.hours}`
-                : created.hours}
+                : creationDate.hours < 10
+                ? `0${creationDate.hours}`
+                : creationDate.hours}
               :
-              {created.minutes === 0
+              {creationDate.minutes === 0
                 ? "00"
-                : created.minutes < 10
-                ? `0${created.minutes}`
-                : created.minutes}
+                : creationDate.minutes < 10
+                ? `0${creationDate.minutes}`
+                : creationDate.minutes}
             </span>
           </div>
           <div>
@@ -75,7 +78,7 @@ function NoteInfo({ handleInfo, currentNote }) {
           </div>
           <div>
             <span>Characters</span>
-            <span>{data.length}</span>
+            <span>{content.length}</span>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export const PageRoutes = () => {
             
             <Route exact path='/' element={<PrivateRoute />}>
                 <Route exact path='/' element={<Container />} />
-                <Route exact path='/note' element={<Container />} />
+                {/* <Route exact path='/note' element={<Container />} /> */}
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/forgot" element={<Forgot />} />

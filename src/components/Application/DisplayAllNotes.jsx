@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-function DisplayAllNotes({ noteList, getCurrentNote, currentNote, pinNote }) {
+function DisplayAllNotes({ noteList, getCurrentNote, currentNote, pinNote, setInNote }) {
 
   const displayNoteElements = (
     <div className="note-list">
       {noteList.map((note) => {
         return (
-          <Link key={note._id} to="/note/" className="note-link">
+          <div key={note._id} onClick={()=>setInNote(false)} className="note-link">
             <div
               className={
                 currentNote._id === note._id
@@ -46,7 +46,7 @@ function DisplayAllNotes({ noteList, getCurrentNote, currentNote, pinNote }) {
                 ></path>
               </svg>
             </div>
-          </Link>
+          </div>
         );
       })}
     </div>

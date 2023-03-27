@@ -11,7 +11,7 @@ import DisplayAllNotes from "./DisplayAllNotes";
 import { margin, textAlign } from "@mui/system";
 
 const AllNotes = forwardRef(
-  ({ noteList, addNewNote, getCurrentNote, currentNote, pinNote }, ref) => {
+  ({ noteList, addNewNote, getCurrentNote, currentNote, pinNote, setInNote }, ref) => {
     const isInitialMount = useRef(true);
     const [searchNote, setSearchNote] = useState("");
     const [filteredNoteList, setFilteredNoteList] = useState([...noteList]);
@@ -101,6 +101,7 @@ const AllNotes = forwardRef(
             getCurrentNote={getCurrentNote}
             currentNote={currentNote}
             pinNote={pinNote}
+            setInNote={setInNote}
           />
         ) : (
           createFirstElement

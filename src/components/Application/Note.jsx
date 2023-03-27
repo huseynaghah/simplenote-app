@@ -5,6 +5,7 @@ import closeMarkDown from "../../images/clear-icon.svg";
 import checkboxIcon from "../../images/checkbox.svg";
 import infoIcon from "../../images/info.svg";
 import createNote from "../../images/new-note.svg";
+import goBackIcon from "../../images/go-back.svg";
 
 import EditNote from "./EditNote";
 import Markdown from "./Markdown";
@@ -30,6 +31,7 @@ const Note = forwardRef(
       addNewNote,
       verticalLineRef,
       handleInfo,
+      setInNote,
     },
     ref
   ) => {
@@ -86,7 +88,7 @@ const Note = forwardRef(
             onClick={addNewNote}
           />
           <div className="vertical-line" ref={verticalLineRef}></div>
-          <Link to="/" className="go-back-link" ref={linkRef}>
+          <Link onClick={()=>setInNote(true)} className="go-back-link" ref={linkRef}>
             <svg
               className="icon-back"
               xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +101,6 @@ const Note = forwardRef(
               ></path>
             </svg>
           </Link>
-
           <img
             src={toggleListIcon}
             alt="Toggle List"
@@ -126,7 +127,7 @@ const Note = forwardRef(
             src={infoIcon}
             alt="Info Icon"
             className={noteList.length !== 0 ? "show-element info" : "info"}
-            // onClick={handleInfo}
+            onClick={handleInfo}
           />
           <img
             src={moreToolsIcon}
@@ -155,7 +156,12 @@ const Note = forwardRef(
             editCurrentNote={editCurrentNote}
           />
         ) : (
-          <svg className="main-logo" width="150" height="150" viewBox="0 0 176 176">
+          <svg
+            className="main-logo"
+            width="150"
+            height="150"
+            viewBox="0 0 176 176"
+          >
             <g fillRule="evenodd" clipRule="evenodd">
               <path
                 d="M152.37 87.885c0-34.066-27.182-63.42-59.45-64.854-6.416-.284-12.647 1.432-17.58 5.573-5.002 4.196-8.07 10.09-8.638 16.595C65.43 59.73 78.537 68.618 91.225 72.09c30.69 8.398 48.462 30.086 46.655 56.757 9.057-11.194 14.49-25.442 14.49-40.962zM84.345 97.24c-28.696-7.853-45.817-29.174-43.62-54.317.027-.287.073-.567.102-.852C29.19 53.846 22 70.023 22 87.886c0 34.348 27.955 63.828 60.277 64.933 7.227.248 14.214-1.685 19.766-6.344 5.67-4.757 9.146-11.435 9.79-18.808 1.703-19.463-16.492-27.417-27.488-30.426z"

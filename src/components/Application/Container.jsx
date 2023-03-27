@@ -23,21 +23,21 @@ function Container() {
 
   useEffect(() => {
     getItems()
-    .then( (data)=>{
-    // setNoteList([...data][0]);
-    const pinnedNotes = [...data][0].filter((note) => note.isPinned);
-    const withoutPinned = [...data][0].filter((note) => !note.isPinned);
-    [...data][0].length > 0 && setCurrentNote([...data][0][0])
-    setNoteList([...pinnedNotes, ...withoutPinned]);
-   })
-    .catch((err)=>console.log(err))
+      .then((data) => {
+        // setNoteList([...data][0]);
+        const pinnedNotes = [...data][0].filter((note) => note.isPinned);
+        const withoutPinned = [...data][0].filter((note) => !note.isPinned);
+        [...data][0].length > 0 && setCurrentNote([...data][0][0])
+        setNoteList([...pinnedNotes, ...withoutPinned]);
+      })
+      .catch((err) => console.log(err))
 
 
-   
+
 
   }, [])
-  
-  console.log("afterfetch" , noteList);
+
+  console.log("afterfetch", noteList);
 
 
 
@@ -47,6 +47,7 @@ function Container() {
   const [shouldUpdateNoteList, setShouldUpdateNoteList] = useState(false);
   const [displayMobile, setDisplayMobile] = useState(true);
   const [displayInfo, setDisplayInfo] = useState(false);
+  const [inNote, setInNote] = useState(true)
 
   const allNotesRef = useRef();
   const notesRef = useRef();
@@ -56,30 +57,30 @@ function Container() {
 
     let userDataFromLocalHost = JSON.parse(localStorage.getItem("user"))
     console.log(userDataFromLocalHost);
-    
-    axios.post("https://simple-note-api.herokuapp.com/api/notes/", {userId: userDataFromLocalHost}, {headers: {Authorization : "Bearer " + token}})
-    .then((res)=>{
-      console.log(res.data);
-      const date = new Date();
 
-      const newNote = {
-        _id: res.data._id,
-        content: res.data.content,
-        creationDate: res.data.creationDate,
-        lastModified: res.data.lastModified,
-        isPinned: res.data.isPinned,
-        markdown: res.data.markdown,
-        tags: res.data.tags,
-        isTrashed: res.data.isTrashed,
-        userId: res.data.userId
-      };
-      setNoteList((prevNoteList) => [newNote, ...prevNoteList]);
+    axios.post("https://simple-note-api.herokuapp.com/api/notes/", { userId: userDataFromLocalHost }, { headers: { Authorization: "Bearer " + token } })
+      .then((res) => {
+        console.log(res.data);
+        const date = new Date();
 
-      setShouldUpdateNoteList(true);
-    })
+        const newNote = {
+          _id: res.data._id,
+          content: res.data.content,
+          creationDate: res.data.creationDate,
+          lastModified: res.data.lastModified,
+          isPinned: res.data.isPinned,
+          markdown: res.data.markdown,
+          tags: res.data.tags,
+          isTrashed: res.data.isTrashed,
+          userId: res.data.userId
+        };
+        setNoteList((prevNoteList) => [newNote, ...prevNoteList]);
+
+        setShouldUpdateNoteList(true);
+      })
 
 
-   
+
   };
 
   const handleShouldUseMarkdown = () => {
@@ -94,22 +95,22 @@ function Container() {
     setCurrentNote(noteList.find((note) => note._id === id && note));
   };
 
-  const handleTodo = () => {};
+  const handleTodo = () => { };
 
   const pinNote = (e, ID, isP) => {
     e.stopPropagation();
     e.preventDefault();
 
-    axios.patch("https://simple-note-api.herokuapp.com/api/notes/pin", {"_id": ID, "isPinned" : !isP}, {headers: {Authorization : "Bearer " + token}} )
-    .then((res)=>console.log(res))
-    .catch((err)=>console.log(err))
+    axios.patch("https://simple-note-api.herokuapp.com/api/notes/pin", { "_id": ID, "isPinned": !isP }, { headers: { Authorization: "Bearer " + token } })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
 
     const newList = noteList.map((note) => {
       return note._id === ID
         ? {
-            ...note,
-            isPinned: !note.isPinned,
-          }
+          ...note,
+          isPinned: !note.isPinned,
+        }
         : note;
     });
 
@@ -136,18 +137,18 @@ function Container() {
 
     let date = new Date().toISOString()
 
-     setCurrentNote((prevCurrentNote) => ({
+    setCurrentNote((prevCurrentNote) => ({
       ...prevCurrentNote,
       content: e.target.value,
       lastModified: date,
     })
     );
 
-    
 
-    axios.patch("https://simple-note-api.herokuapp.com/api/notes/edit", {"_id": currentNote._id, content: e.target.value, lastModified: date}, {headers: {Authorization : "Bearer " + token}})
-    .then((res)=>console.log(res.data))
-    .catch((err)=>console.log(err))
+
+    axios.patch("https://simple-note-api.herokuapp.com/api/notes/edit", { "_id": currentNote._id, content: e.target.value, lastModified: date }, { headers: { Authorization: "Bearer " + token } })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err))
 
 
   };
@@ -156,13 +157,13 @@ function Container() {
 
     console.log("repsel", id);
 
-    axios.post("https://simple-note-api.herokuapp.com/api/notes/delete",  {"_id" : id}, {headers: {Authorization : "Bearer " + token}})
-    .then((res)=>{
-      console.log(res.data)
-      
-    })
-    .catch((err)=>console.log(err))
-    
+    axios.post("https://simple-note-api.herokuapp.com/api/notes/delete", { "_id": id }, { headers: { Authorization: "Bearer " + token } })
+      .then((res) => {
+        console.log(res.data)
+
+      })
+      .catch((err) => console.log(err))
+
     const newNoteList = noteList.filter((note) => note._id !== id);
     const indexCurrent = noteList.indexOf(currentNote);
 
@@ -231,70 +232,71 @@ function Container() {
     <>
       <div className="grid-container">
         {displayMobile ? (
-          
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <AllNotes
-                    noteList={noteList}
-                    addNewNote={addNewNote}
-                    getCurrentNote={getCurrentNote}
-                    currentNote={currentNote}
-                    pinNote={pinNote}
-                    ref={allNotesRef}
-                  />
-                }
+
+          <>
+            {inNote ?
+              <AllNotes
+                noteList={noteList}
+                addNewNote={addNewNote}
+                getCurrentNote={getCurrentNote}
+                currentNote={currentNote}
+                pinNote={pinNote}
+                ref={allNotesRef}
+                setInNote={setInNote}
+              /> :
+              <Note
+                noteList={noteList}
+                currentNote={currentNote}
+                editCurrentNote={editCurrentNote}
+                pinNote={pinNote}
+                handleShouldUseMarkdown={handleShouldUseMarkdown}
+                handleDelete={handleDelete}
+                handleTodo={handleTodo}
+                handleToggle={handleToggle}
+                addNewNote={addNewNote}
+                ref={notesRef}
+                handleInfo={handleInfo}
+                setInNote={setInNote}
               />
-              <Route
-                path="/"
-                element={
-                  <Note
-                    noteList={noteList}
-                    currentNote={currentNote}
-                    editCurrentNote={editCurrentNote}
-                    pinNote={pinNote}
-                    handleShouldUseMarkdown={handleShouldUseMarkdown}
-                    handleDelete={handleDelete}
-                    handleTodo={handleTodo}
-                    handleToggle={handleToggle}
-                    addNewNote={addNewNote}
-                    ref={notesRef}
-                    handleInfo={handleInfo}
-                  />
-                }
-              />
-            </Routes>
-          
+            }
+
+
+
+          </>
+
         ) : (<>
-            <AllNotes
-              noteList={noteList}
-              addNewNote={addNewNote}
-              getCurrentNote={getCurrentNote}
-              currentNote={currentNote}
-              pinNote={pinNote}
-              ref={allNotesRef}
-            />
-            <Note
-              noteList={noteList}
-              currentNote={currentNote}
-              editCurrentNote={editCurrentNote}
-              pinNote={pinNote}
-              handleShouldUseMarkdown={handleShouldUseMarkdown}
-              handleDelete={handleDelete}
-              handleTodo={handleTodo}
-              handleToggle={handleToggle}
-              addNewNote={addNewNote}
-              ref={notesRef}
-              verticalLineRef={verticalLineRef}
-              handleInfo={handleInfo}
-            />
-         </>
+          <AllNotes
+            noteList={noteList}
+            addNewNote={addNewNote}
+            getCurrentNote={getCurrentNote}
+            currentNote={currentNote}
+            pinNote={pinNote}
+            ref={allNotesRef}
+            setInNote={setInNote}
+          />
+          <Note
+            noteList={noteList}
+            currentNote={currentNote}
+            editCurrentNote={editCurrentNote}
+            pinNote={pinNote}
+            handleShouldUseMarkdown={handleShouldUseMarkdown}
+            handleDelete={handleDelete}
+            handleTodo={handleTodo}
+            handleToggle={handleToggle}
+            addNewNote={addNewNote}
+            ref={notesRef}
+            verticalLineRef={verticalLineRef}
+            handleInfo={handleInfo}
+            setInNote={setInNote}
+          />
+        </>
         )}
       </div>
-      {displayInfo && (
-        <NoteInfo handleInfo={handleInfo} currentNote={currentNote} />
-      )}
+      {
+        displayInfo && (
+          <NoteInfo handleInfo={handleInfo} currentNote={currentNote} />
+        )
+      }
     </>
   );
 }
