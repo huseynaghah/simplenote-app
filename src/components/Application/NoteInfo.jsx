@@ -4,7 +4,8 @@ function NoteInfo({ handleInfo, currentNote }) {
   const { creationDate, lastModified, content } = currentNote;
 
   let dateLast = new Date (currentNote.lastModified)
-  console.log("eyooo" , dateLast.getHours());
+  // console.log(dateLast);
+  let dateCreate = new Date( currentNote.creationDate)
 
   let wordCount = 0;
   const dataArray = content.split("\n");
@@ -41,8 +42,8 @@ function NoteInfo({ handleInfo, currentNote }) {
           <div>
             <span>Modified</span>
             <span>
-              {month[dateLast.getMonth()]} {dateLast.getDate()}, {dateLast.getFullYear()},{" "}
-              {dateLast.getHours() === 0
+              {month[dateLast.getMonth()]} {dateLast.getDate()}, {dateLast.getFullYear()}{" "}, {dateLast.getHours()}:{dateLast.getMinutes()}
+              {/* {dateLast.getHours() === 0
                 ? "00"
                 : dateLast.hours < 10
                 ? `0${dateLast.hours}`
@@ -52,14 +53,14 @@ function NoteInfo({ handleInfo, currentNote }) {
                 ? "00"
                 : dateLast.minutes < 10
                 ? `0${dateLast.minutes}`
-                : dateLast.minutes}
+                : dateLast.minutes} */}
             </span>
           </div>
           <div>
             <span>Created</span>
             <span>
-              {month[creationDate.month]} {creationDate.dayOfMonth}, {creationDate.year},{" "}
-              {creationDate.hours === 0
+              {month[dateCreate.getMonth()]} {dateCreate.getDate()}, {dateCreate.getFullYear()}{" "}, {dateCreate.getHours()}:{dateCreate.getMinutes()}
+              {/* {creationDate.hours === 0
                 ? "00"
                 : creationDate.hours < 10
                 ? `0${creationDate.hours}`
@@ -69,7 +70,7 @@ function NoteInfo({ handleInfo, currentNote }) {
                 ? "00"
                 : creationDate.minutes < 10
                 ? `0${creationDate.minutes}`
-                : creationDate.minutes}
+                : creationDate.minutes} */}
             </span>
           </div>
           <div>
